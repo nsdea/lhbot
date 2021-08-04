@@ -4,7 +4,7 @@
 ## Fast geschafft!
 1. Bitte **kopiere** den kompletten Link (**URL**) der aktuellen Webseite.
    
-2. Schicke dem *LH-Community Bot* auf *Discord* folgendes per **Privatnachricht** (natürlich entsprechend umändern):
+2. Schicke dem *LH-Community Bot* auf *Discord* folgendes per DM/**Privatnachricht** (natürlich entsprechend umändern):
     >  `!auth DEINE_KOPIERTE_URL_HIER_EINFÜGEN`
 
     **Zum Beispiel:** (bitte nicht wirklich das Folgende senden)

@@ -26,25 +26,25 @@ async def on_ready():
 async def on_command_error(ctx, error):
     # error: 'error message'
     error_messages = {
-        commands.CheckFailure: 'There was a problem with a check.',
-        commands.UserInputError: 'There was a problem with your input.',
-        commands.CommandNotFound: f'Command not found. Use **`{PREFIX}help`** for a list of commands.',
+        commands.ExtensionError: 'Es gab ein Problem in einer Erweiterung ("cog").',
+        commands.CheckFailure: 'Es gab ein Problem mit der Überprüfung, ob etwas ausgeführt werden soll.',
+        commands.UserInputError: 'Überprüfe bitte deine Eingabe.',
+        commands.CommandNotFound: f'Befehl nicht gefunden. Benutze **`{PREFIX}help`** für eine Befehlsliste.',
         # the f-string generates the help-command for the command
-        commands.MissingRequiredArgument: f'Oops, I think you [*forgo**r*** 💀](https://i.redd.it/mc9ut2313b571.jpg) an argument, go check it using **`{PREFIX}help {ctx.message.content.replace(PREFIX, "").split()[0]}`**',
+        commands.MissingRequiredArgument: f'Du hast ein Befehlsargument vergessen, benutze **`{PREFIX}help {ctx.message.content.replace(PREFIX, "").split()[0]}`** für Hilfe.',
         # the f-string generates the help-command for the command
-        commands.TooManyArguments: f'You gave too many arguments, use this command for help: **`{PREFIX}help {ctx.message.content.replace(PREFIX, "").split()[0]}`**',
-        commands.Cooldown: 'Please be patient :)',
+        commands.TooManyArguments: f'Du hast zu viele Argumente eingegeben, benutze **`{PREFIX}help {ctx.message.content.replace(PREFIX, "").split()[0]}`** für Hilfe.',
+        commands.Cooldown: 'Bitte warte, du kannst diesen Befehl erst später ausführen.',
         # commands.MessageNotFound: 'This message could not be found.',
         # commands.ChannelNotFound: 'This channel could not be found.',
-        commands.NoPrivateMessage: 'This does not work in DM channels.',
-        commands.MissingPermissions: 'Sorry, you don\'t have the following permission(s) to do this:',
-        commands.BotMissingPermissions: 'Sorry, I don\'t have the following permission(s) to do this:',
-        commands.ExtensionError: 'This is probably a bug you can\'t do anything about, but there was a problem with an extension.',
+        commands.NoPrivateMessage: 'Dies Funktioniert nicht in DM-Kanälen.',
+        commands.MissingPermissions: 'Du brauchst leider folgende Berechtigung(en), um das zu tun:',
+        commands.BotMissingPermissions: 'Ich brauche folgende Berechtigung(en), um das zu tun:',
         # the f-string generates the help-command for the command
-        commands.BadArgument: f'There was a problem converting one of the argument\'s type, use this command for help: **`{PREFIX}help {ctx.message.content.replace(PREFIX, "").split()[0]}`**',
+        commands.BadArgument: f'Es gab ein Problem mit dem Konvertieren der Argumente, benutze den folgenden Befehl für Hilfe: **`{PREFIX}help {ctx.message.content.replace(PREFIX, "").split()[0]}`**',
     }
 
-    error_msg = 'Unknown error.'
+    error_msg = 'Unbekannter Fehler.'
 
     # create the error message using the dict above
     for e in error_messages.keys():
@@ -54,18 +54,18 @@ async def on_command_error(ctx, error):
     # other errors:
     # - too long
     if 'Invalid Form Body' in str(error):
-        error_msg = 'Sorry, I can\'t send messages that long due to Discord limitations.'
+        error_msg = 'Ich kann leider nicht die Nachricht senden, weil sie zu lang gewesen wäre.'
 
     # - bug
     if 'Command raised an exception' in str(error):
-        error_msg = 'Oops, our developers maybe messed up here. This is probably a bug.'
+        error_msg = 'Huch, es gab ein Problem mit dem Code.'
 
     # add detailed info
     if isinstance(error, commands.MissingPermissions) or isinstance(error, commands.BotMissingPermissions):
         error_msg += f'\n**`{", ".join(error.missing_perms)}`**\n'
 
     # add full error description formatted as a code text
-    error_msg += '\n\n__Error message:__\n```\n' + str(error) + '\n```'
+    error_msg += '\n\n**Konsole:**\n```\n' + str(error) + '\n```'
 
     # create a cool embed
     embed = discord.Embed(
@@ -76,16 +76,11 @@ async def on_command_error(ctx, error):
 
     # send it
     await ctx.send(embed=embed)
-    if TESTING_MODE or error_msg == 'Unknown error.':
+    if TESTING_MODE or error_msg == 'Unbekannter Fehler.':
         raise error  # if this is a testing system, show the full error in the console
 
-# help command
-# pretty much copy and pasted from *my* bot "NeoVision"
-# but nobody cares, I mean, it's cool and useful
-# so... I guess everything is fine
 
-
-@client.command(aliases=['command', 'commands', 'help'], help='📃Display info about commands.', usage='(<command name>)')
+@client.command(aliases=['command', 'commands', 'help'], help='📃Listet entweder alle Befehle auf oder zeigt Info über einen bestimmten Befehl an.', usage='(<command name>)')
 async def commandinfo(ctx, name=None):
     if name:
         for c in client.commands:
@@ -109,8 +104,8 @@ async def commandinfo(ctx, name=None):
         def sortkey(x):
             return x.name
 
-        categories = {'🚨': 'Main commands', '📃': 'Information and help',
-                      '🔧': 'Tools and utilities', '🔒': 'Special', '🔩': 'Other'}
+        categories = {'🚨': 'Hauptsystem', '📃': 'Info',
+                      '🔧': 'Tools', '🔒': 'Speziell', '🔩': 'Andere'}
 
         # ok, somehow I managed to get this to work, don't ask me how, but it WORKS
         text = ''
@@ -129,9 +124,9 @@ async def commandinfo(ctx, name=None):
                 #   else:
                 #     text += f'{command.name}\n'
 
-        embed = discord.Embed(title='Commands', color=COLOR, description=text)
+        embed = discord.Embed(title='Befehle', color=COLOR, description=text)
         embed.set_footer(
-            text=f'Run {PREFIX}help <command> for detailed info on a command')
+            text=f'Benutze {PREFIX}help <command> für mehr Info über einen bestimmten Befehl.')
         await ctx.send(embed=embed)
 
 # load cogs

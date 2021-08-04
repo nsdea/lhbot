@@ -11,6 +11,15 @@ class Verification(commands.Cog):
     def __init__(self, client) -> None:
         self.client = client
     
+    @commands.has_permissions(manage_channels=True)
+    @commands.command(help='🔧Fügt einen Verifizierungskanal hinzu (add) oder löscht (remove) ihn. [Benötigt die Berechtigung "manage_channels"]')
+    async def verifychannel(self, ctx, action, channel: discord.TextChannel):
+        if action == 'add':
+            await ctx.send(embed=discord.Embed(title='Channel hinzugefügt', description=f'Der Kanal {channel.mention} wurde erfolgreich als Verifizierungskanal hinzugefügt!', color=config.load()['design']['colors']['primary']))
+
+        elif action == 'remove':
+            await ctx.send(embed=discord.Embed(title='Channel entfernt', description=f'Der Kanal {channel.mention} wurde erfolgreich als Verifizierungskanal entfernt!', color=config.load()['design']['colors']['primary']))
+
     @commands.Cog.listener()
     async def on_member_join(self, member): # someone joins the server        
         for channel_id in config.load()['system']['verification']['channel_ids']: # for every single verification channel

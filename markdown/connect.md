@@ -1,5 +1,3 @@
-![Cover](../media/lh_cover.png)
-
 # LH Connect
 ## Fast geschafft!
 1. Bitte **kopiere** den kompletten Link (**URL**) der aktuellen Webseite.
@@ -14,3 +12,10 @@
     Danke!
 
 3. Fertig! 
+
+![Cover](../media/lh_cover.png)
+
+
+***
+Falls du gerade nicht in Discord auf "Autorisieren" geklickt hast:
+Diese Seite wird angezeigt, um einen Nutzer sicher zu verbinden (*LH Connect*).

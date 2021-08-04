@@ -20,6 +20,12 @@ class Authorization(commands.Cog):
                 auth_id = authorize.auth(url)
                 if auth_id == ctx.author.id: # connected
                     await ctx.author.send(embed=discord.Embed(title='LH Connect - Erfolg', description=f':white_check_mark: Super! Dein Konto wurde **erfolgreich** mit *LH Connect* verbunden!', color=config.load()['design']['colors']['primary']))
+
+                    for role_id in config.load()['system']['verification']['role_id_on_success']: # for every single verification role
+                        verification_role =  ctx.author.guild.get_role(role_id) # create object to work with
+                        if verification_role in ctx.author.guild.roles: # if the Discord server has this role 
+                            await ctx.author.add_roles(verification_role)
+
                 else: # error
                     await ctx.author.send(embed=discord.Embed(title='LH Connect - Fehler', description=':x: Leider konnte dein Konto **nicht verbunden** werden.\nVersuche es erneut (von Anfang an!), möglichweise musst du etwas warten.', color=0xFF0000))
             else:
@@ -28,7 +34,7 @@ class Authorization(commands.Cog):
 
         else: # send setup URL
             auth_url = f'https://discord.com/api/oauth2/authorize?client_id={self.client.user.id}&redirect_uri=https%3A%2F%2Fgithub.com%2Fnsde%2Flhbot%2Fblob%2Fmain%2Fmarkdown%2Fconnect.md&response_type=code&scope=identify'
-            await ctx.send(embed=discord.Embed(title='LH Connect - Setup', description=f':white_check_mark: Klicke auf den blauen Knopf "Autorisieren" und folge den Schritten.\n\n**{auth_url}**\n\nFalls nach dem Klicken auf den blauen Button "Autorisieren" die geöffnete Webseite leer ist, versuche sie neu zu laden.', color=config.load()['design']['colors']['primary']))
+            await ctx.send(embed=discord.Embed(title='LH Connect - Setup', description=f':white_check_mark: Klicke auf den blauen Knopf "Autorisieren" und folge den Schritten.\n\n**{auth_url}**\n\nFalls nach dem Klicken auf den blauen Button "Autorisieren" die geöffnete Webseite leer ist, versuche, sie neu zu laden.', color=config.load()['design']['colors']['primary']))
 
 def setup(client):
     client.add_cog(Authorization(client))

@@ -1,0 +1,23 @@
+bot:
+  prefix: '!'
+  developer_discord_ids:
+    - 657900196189044736 # onlix
+    - 338711554683830292 # Raptor
+    - 334567239342620675 # LH
+  testing_device_names:
+    - 'RTX3090'
+
+system:
+  verification:
+    channel_ids:
+      - 789592545624719402
+    timeout_seconds: 60
+    role_id_on_success:
+      - 872502894870552626
+
+design:
+  colors:
+    primary: 0x00DCFF
+    primary_dark: 0x214B8D
+    primary_night: 0x000A1C
+

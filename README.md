@@ -1,17 +1,44 @@
-![LH-Cyber-Security](Images/image.png)
+![Cover](media/lh_cover.png)
 
 # Community Bot
+The following statistics are **fully automatic and 100% up to date!** 
+### Repository
+![Could not load repository](https://img.shields.io/github/contributors/nsde/lhbot)
+![Could not load repository](https://img.shields.io/github/commit-activity/m/nsde/lhbot)
+![Could not load repository](https://img.shields.io/github/last-commit/nsde/lhbot)
+
+### Code
+![Could not load repository](https://img.shields.io/github/languages/top/nsde/lhbot)
+![Could not load repository](https://img.shields.io/github/license/nsde/lhbot)
+![Could not load repository](https://img.shields.io/github/repo-size/nsde/lhbot)
+### Security & Stability
+![Could not load repository](https://img.shields.io/snyk/vulnerabilities/github/nsde/lhbot)
+![Could not load repository](https://img.shields.io/github/issues-raw/nsde/lhbot)
+![Could not load repository](https://img.shields.io/scrutinizer/quality/b/nsde/lhbot)
+
+### Features
+![Could not load repository](https://img.shields.io/github/search/nsde/lhbot/@commands.command?label=Commands)
+![Could not load repository](https://img.shields.io/github/search/nsde/lhbot/@commands.Cog.listener?label=Event%20Listeners)
+![Could not load repository](https://img.shields.io/github/search/nsde/lhbot/client.add_cog?label=Cogs%20%28Extensions%29)
+
+### Join our Discord community!
+![Loading...](https://img.shields.io/discord/623157804013715456?label=Discord)
 # Contribute to support us!
 
 ## Requirements
 - Some coding knowledge (*Python*, *Git(Hub)*, *IDEs*, *Discord*,...)
 - If you're not familiar with most of the terms listed above, you may watch some tutorials or ask us first
   - German tutorials:
-    - Series: https://www.youtube.com/playlist?list=PLNmsVeXQZj7rI3usLYlWhsjdFJ-MER_pU
-    - Introduction: https://youtu.be/GL57VWBV8g0
+    - DiscordPy-Serie: https://www.youtube.com/playlist?list=PLNmsVeXQZj7rI3usLYlWhsjdFJ-MER_pU
+    - DiscordPy-Einführung: https://youtu.be/GL57VWBV8g0
+    - Git (langes Tutorial): https://youtu.be/uGLQF2kUwOA
+    - Git (kurzes Tutorial); https://youtu.be/elh1y6laO8I
+
   - English tutorials:
     - Tutorial series: https://youtu.be/nW8c7vT6Hl4
     - Full one-hour course: https://youtu.be/SPTfmiYiuok
+    - Git (short tutorial): https://youtu.be/USjZcfj8yxE
+    - Git (long tutorial): https://youtu.be/RGOj5yH7evk
     - https://www.techwithtim.net/tutorials/discord-py/
     - https://realpython.com/how-to-make-a-discord-bot-python/
 
@@ -75,7 +102,17 @@
 ----------
 
 
-
+## Troubleshooting
+### No permissions
+The bot might not have the correct permissions.
+An exception should appear in the console saying:
+```py
+discord.errors.Forbidden: 403 Forbidden (error code: 50013): Missing Permissions
+```
+In this case, make sure the bot has **Administrator** permissions and has a very high role:
+- Go to **Server Settings**
+- Open the **Roles** Tab
+- Add a role to the bot and move it all the way to the top
 ## JoinMessage Example
 
 ```python

@@ -1,5 +1,10 @@
 {
     "cSpell.ignoreWords": [
-        "glhf"
+        "dotenv",
+        "getenv",
+        "glhf",
+        "leaderboard",
+        "onlix",
+        "willich"
     ]
 }

@@ -21,3 +21,5 @@ design:
     primary_dark: 0x214B8D
     primary_night: 0x000A1C
 
+misc:
+  discord_api_version: 8

@@ -85,8 +85,8 @@ The following statistics are **fully automatic and 100% up to date!**
 | ------ | ------ |  ------ | ------ | ------ |
 | !meme | !meme | Sends a meme | @everyone  | 🔴 |
 | !game | !game | A little game | @everyone  | 🔴 |
-| !ban | !ban "@USER" | Ban a user | @owner  | 🟡 |
-| !unban | !unban "@USER" | Unban the user | @owner  | 🟡 |
+| !ban | !ban "@USER" | Ban a user | @owner  | 🟢 |
+| !unban | !unban "@USER" | Unban the user | @owner  | 🟢 |
 | !mute | !mute "@USER" | Mute a user | @owner  | 🟠 |
 | !unmute | !unmute "@USER" | Unmute a user | @owner  | 🟠 |
 | !set | !set join "#channel", !set leave "#channel" | Sets the channel in which the (welcome / leave) messages are sent to. | @owner  | 🔴 |
@@ -94,7 +94,7 @@ The following statistics are **fully automatic and 100% up to date!**
 | !help | !help | Shows a help page | @everyone  | 🔵 |
 | !prefix | !prefix "new prefix" | Changes the prefix to "prefix". | @owner | 🔴 |
 | !info | !info "@USER", !serverinfo, !info server | Shows information about the server as well as about the user. | @everyone | 🟡 |
-| !leaderboard | !leaderboard, !leaderboard invites, leaderboard activity | Shows a ranking of the most active users or with the most invites. | @everyone | 🟡 |
+| !leaderboard | !leaderboard, !leaderboard invites, leaderboard activity | Shows a ranking of the most active users or with the most invites. | @everyone | 🟢 |
 | !verify | !verify "#channel" | Sets the channel in which the verification query will be made | @owner | 🔴 |
 
 ### Legend

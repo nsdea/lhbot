@@ -12,7 +12,7 @@ class Verification(commands.Cog):
         self.client = client
     
     @commands.has_permissions(manage_channels=True)
-    @commands.command(help='🔧Fügt einen Verifizierungskanal hinzu (add) oder löscht (remove) ihn. [Benötigt die Berechtigung "manage_channels"]')
+    @commands.command(help='🔒Fügt einen Verifizierungskanal hinzu (add) oder löscht (remove) ihn. [Benötigt die Berechtigung "manage_channels"]')
     async def verifychannel(self, ctx, action, channel: discord.TextChannel):
         if action == 'add':
             await ctx.send(embed=discord.Embed(title='Channel hinzugefügt', description=f'Der Kanal {channel.mention} wurde erfolgreich als Verifizierungskanal hinzugefügt!', color=config.load()['design']['colors']['primary']))
@@ -36,7 +36,7 @@ class Verification(commands.Cog):
                 try:
                     await self.client.wait_for('message', check=message_check, timeout=config.load()['system']['verification']['timeout_seconds'])
                 except asyncio.TimeoutError: # time's up
-                    await verification_messages.append(verification_channel.send(delete_after=10, content=member.mention, embed=discord.Embed(title='Zeit abgelaufen!', color=config.load()['design']['colors']['primary'], description=f'Die Zeit für die Verifizierungsaufgabe ist leider abgelaufen.')))
+                    verification_messages.append(await verification_channel.send(delete_after=10, content=member.mention, embed=discord.Embed(title='Zeit abgelaufen!', color=config.load()['design']['colors']['primary'], description=f'Die Zeit für die Verifizierungsaufgabe ist leider abgelaufen.')))
                     return
                 else: # user sent something:
                     
@@ -60,7 +60,7 @@ class Verification(commands.Cog):
                         color = 0xFF0000
                         verification_messages.append(await verification_channel.send(content=member.mention, embed=discord.Embed(color=color, title=':x: Das ist leider falsch!', description='Du hast die Verifizierungsaufgabe leider nicht bestanden. Sorry ¯\_(ツ)_/¯')))
 
-                    await asyncio.sleep(10)
+                    await asyncio.sleep(1)
 
                     for msg in verification_messages:
                         await msg.delete()

@@ -1,4 +1,4 @@
-from discord.channel import DMChannel
+# Local
 from .helpers import config
 from .helpers import authorize
 
@@ -11,10 +11,10 @@ class Authorization(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=['connect'], help='🔧LH Connect ist ein sicheres Verifizierungsverfahren, in dem eine Discord-Verbindung zum Nutzer hergestellt und überprüft wird.')
+    @commands.command(aliases=['connect'], help='⚙️LH Connect ist ein sicheres Verifizierungsverfahren, in dem eine Discord-Verbindung zum Nutzer hergestellt und überprüft wird.')
     async def auth(self, ctx, url=None):
         if url: # URL argument exists
-            if isinstance(ctx.channel, DMChannel): # command is being ran in a DM channel
+            if isinstance(ctx.channel, discord.DMChannel): # command is being ran in a DM channel
                 await ctx.reply(embed=discord.Embed(title='LH Connect - Wichtiger Hinweis!', description=f':warning: **Ganz wichtig! Lösche bitte deine Nachricht!**\nDies dient deiner eigenen Sicherheit.', color=0xFFFF00))
 
                 auth_id = authorize.auth(url)

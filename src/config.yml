@@ -6,6 +6,8 @@ bot:
     - 334567239342620675 # LH
   testing_device_names:
     - 'RTX3090'
+    - 'onlix'
+    - 'uwuntu'
 
 system:
   verification:
@@ -14,6 +16,11 @@ system:
     timeout_seconds: 60
     role_id_on_success:
       - 872502894870552626
+
+commands:
+  leaderboard:
+    chat_channel_ids:
+      - 789592545624719408
 
 design:
   colors:

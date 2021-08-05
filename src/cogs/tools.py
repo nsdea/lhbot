@@ -1,4 +1,5 @@
 # local
+from .helpers import config
 from .helpers import challenges
 
 import discord
@@ -44,6 +45,85 @@ class Tools(commands.Cog):
     async def unban(self, ctx, user: discord.User):
         await ctx.guild.unban(user, reason=str(ctx.author))
         await ctx.message.add_reaction('👍')
+
+    @commands.command(help='🔧Zeit Infos über Mitglieder der Servers an! (Eingabe: ping/name#tag/ID)')
+    async def info(self, ctx, member: discord.Member=None):
+        if not member:
+            member = ctx.author
+
+        custom_status = '*[inaktiv]*'
+        activity = '*[inaktiv]*'
+
+        if member.activities:
+            for member_activity in member.activities:
+                if type(member_activity) is discord.CustomActivity:
+                    custom_status = member_activity.name
+                elif type(member_activity) is discord.Activity:
+                    activity = member_activity.name
+        
+        nick = '*[Not set]*'
+        if member.nick:
+            nick = member.nick
+
+        roles = []
+        for role in member.roles:
+            roles.append(role.mention)
+        roles = ' '.join(x.mention for x in member.roles)
+
+        status = member.status
+        created = member.created_at.strftime('%A, %B %d, %Y %H:%M:%S %p %Z')
+        joined = member.joined_at.strftime('%A, %B %d, %Y %H:%M:%S %p %Z')
+        highest_role = member.top_role.mention
+
+        status_icon = str(member.status).replace('dnd', ':no_entry:').replace('online', ':green_circle:').replace('idle', ':crescent_moon:').replace('offline', ':black_circle:')
+        info = f'''
+            **ID**
+            {member.id}
+            **Nickname**
+            {nick}
+            **Status**
+            {status}
+            **Custom Status**
+            {custom_status}
+            **Aktivität**
+            {activity}
+            **Konto erstellt**
+            {created}
+            **Server beigetreten**
+            {joined}
+            **Hauptrolle**
+            {highest_role}
+            **Alle Rollen**
+            {roles}
+            '''
+        embed = discord.Embed(title=f'{status_icon} {member.name}#{member.discriminator}', color=member.top_role.color, description=info)
+        embed.set_thumbnail(url=member.avatar_url)
+        await ctx.send(embed=embed)
+
+    @commands.command(help='🔧Zeit Infos über den Server an!')
+    async def serverinfo(self, ctx):
+        created = ctx.guild.created_at.strftime('%A, %B %d, %Y %H:%M:%S %p %Z')
+
+        text = f'''
+        **ID**
+        {ctx.guild.id}
+        **Erstellt**
+        {created}
+        **Mitgliederanzahl**
+        {ctx.guild.member_count}
+        **Rollenanzahl**
+        {len(ctx.guild.roles)}
+        **Kanalanzahl**
+        {len(ctx.guild.channels)}
+        **Eigentümer**
+        {ctx.guild.owner.mention}
+        **Nitro Boosts**
+        {ctx.guild.premium_subscription_count}
+        '''
+
+        embed = discord.Embed(title=ctx.guild.name, color=config.load()['design']['colors']['primary'], description=text)
+        embed.set_thumbnail(url=ctx.guild.icon_url)
+        await ctx.send(embed=embed)
 
 def setup(client):
     client.add_cog(Tools(client))

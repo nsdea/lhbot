@@ -118,12 +118,7 @@ async def commandinfo(ctx, name=None):
                     else:
                         text += f'{command.name}\n'
                     continue
-                # if category == '✨' and command.help[0] not in categories.keys():
-                #   if command.aliases:
-                #     text += f'{command.name} *({"/".join(command.aliases)})*\n'
-                #   else:
-                #     text += f'{command.name}\n'
-
+                
         embed = discord.Embed(title='Befehle', color=COLOR, description=text)
         embed.set_footer(
             text=f'Benutze {PREFIX}help <command> für mehr Info über einen bestimmten Befehl.')

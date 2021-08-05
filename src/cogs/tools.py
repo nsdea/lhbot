@@ -23,16 +23,15 @@ class Tools(commands.Cog):
         
         await are_you_sure_message.add_reaction('☑️')
 
-        def check(reaction, user):
-            return reaction.message == are_you_sure_message and user == ctx.author
+        def check(reaction, user): return reaction.message == are_you_sure_message and user == ctx.author
 
         try:
             await self.client.wait_for('reaction_add', check=check, timeout=60)
         except asyncio.TimeoutError: # Zeit abgelaufen?
             return
-        else:
-            await ctx.channel.purge(limit=count)
-            await ctx.send(delete_after=5, embed=discord.Embed(title=':wastebasket: Chat gepurged!', description=f'**{count if count != 999999 else "Alle"}** Nachrichten im Kanal sollten jetzt weg sein! :)', color=discord.Color(0x00FF00)).set_footer(text=f'Diese Nachricht wird nach 5 Sekunden gelöscht.'))
+
+        await ctx.channel.purge(limit=count)
+        await ctx.send(delete_after=5, embed=discord.Embed(title=':wastebasket: Chat gepurged!', description=f'**{count if count != 999999 else "Alle"}** Nachrichten im Kanal sollten jetzt weg sein! :)', color=discord.Color(0x00FF00)).set_footer(text=f'Diese Nachricht wird nach 5 Sekunden gelöscht.'))
 
     @commands.has_permissions(ban_members=True)
     @commands.command(help='🔒Bannt jemanden (Eingabe: ping/name#tag/ID). [Benötigt die "ban_members" Berechtigung für sowohl den Bot, als auch für den Nutzer.]')
@@ -48,8 +47,7 @@ class Tools(commands.Cog):
 
     @commands.command(help='🔧Zeit Infos über Mitglieder der Servers an! (Eingabe: ping/name#tag/ID)')
     async def info(self, ctx, member: discord.Member=None):
-        if not member:
-            member = ctx.author
+        member = ctx.author if not member else member
 
         custom_status = '*[inaktiv]*'
         activity = '*[inaktiv]*'
@@ -58,17 +56,12 @@ class Tools(commands.Cog):
             for member_activity in member.activities:
                 if type(member_activity) is discord.CustomActivity:
                     custom_status = member_activity.name
-                elif type(member_activity) is discord.Activity:
-                    activity = member_activity.name
+                    continue
+                activity = member_activity.name
         
-        nick = '*[Not set]*'
-        if member.nick:
-            nick = member.nick
+        nick = member.nick if member.nick else '*[Not set]*'
 
-        roles = []
-        for role in member.roles:
-            roles.append(role.mention)
-        roles = ' '.join(x.mention for x in member.roles)
+        roles = ' '.join([r.mention for r in member.roles])    
 
         status = member.status
         created = member.created_at.strftime('%A, %B %d, %Y %H:%M:%S %p %Z')
@@ -98,6 +91,7 @@ class Tools(commands.Cog):
             '''
         embed = discord.Embed(title=f'{status_icon} {member.name}#{member.discriminator}', color=member.top_role.color, description=info)
         embed.set_thumbnail(url=member.avatar_url)
+        
         await ctx.send(embed=embed)
 
     @commands.command(help='🔧Zeit Infos über den Server an!')

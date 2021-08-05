@@ -14,7 +14,8 @@ The following statistics are **fully automatic and 100% up to date!**
 ### Security & Stability
 ![Could not load repository](https://img.shields.io/snyk/vulnerabilities/github/nsde/lhbot)
 ![Could not load repository](https://img.shields.io/github/issues-raw/nsde/lhbot)
-![Could not load repository](https://img.shields.io/scrutinizer/quality/b/nsde/lhbot)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nsde/lhbot/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/nsde/lhbot/?branch=main)
+[![Build Status](https://scrutinizer-ci.com/g/nsde/lhbot/badges/build.png?b=main)](https://scrutinizer-ci.com/g/nsde/lhbot/build-status/main)
 
 ### Features
 ![Could not load repository](https://img.shields.io/github/search/nsde/lhbot/@commands.command?label=Commands)
@@ -93,7 +94,7 @@ The following statistics are **fully automatic and 100% up to date!**
 | !del | !del join "#channel", !del leave "#channel" | Removes the channel in which the (welcome / leave) messages are sent to. | @owner  | 🔴 |
 | !help | !help | Shows a help page | @everyone  | 🔵 |
 | !prefix | !prefix "new prefix" | Changes the prefix to "prefix". | @owner | 🔴 |
-| !info | !info "@USER", !serverinfo, !info server | Shows information about the server as well as about the user. | @everyone | 🟡 |
+| !info | !info "@USER", !serverinfo | Shows information about the server as well as about the user. | @everyone | 🟢 |
 | !leaderboard | !leaderboard, !leaderboard invites, leaderboard activity | Shows a ranking of the most active users or with the most invites. | @everyone | 🟢 |
 | !verify | !verify "#channel" | Sets the channel in which the verification query will be made | @owner | 🔴 |
 

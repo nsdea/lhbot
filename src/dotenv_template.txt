@@ -1,7 +1,7 @@
-REDDIT_ID=
-REDDIT_SECRET=
-REDDIT_PASSWORD=
-REDDIT_USERNAME=
+REDDIT_ID=your_reddit_app_id_here
+REDDIT_SECRET=your_reddit_app_secret_here
+REDDIT_PASSWORD=your_reddit_bot_account_password_here
+REDDIT_USERNAME=your_reddit_bot_account_username_here
 DISCORD_ID=your_discord_bot_id_here
 DISCORD_TOKEN=your_discord_bot_token_here
 DISCORD_SECRET=your_discord_bot_secret_here

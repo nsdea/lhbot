@@ -53,12 +53,10 @@ async def on_command_error(ctx, error):
 
     # other errors:
     # - too long
-    if 'Invalid Form Body' in str(error):
-        error_msg = 'Ich kann leider nicht die Nachricht senden, weil sie zu lang gewesen wäre.'
+    if 'Invalid Form Body' in str(error): error_msg = 'Ich kann leider nicht die Nachricht senden, weil sie zu lang gewesen wäre.'
 
     # - bug
-    if 'Command raised an exception' in str(error):
-        error_msg = 'Huch, es gab ein Problem mit dem Code.'
+    if 'Command raised an exception' in str(error): error_msg = 'Huch, es gab ein Problem mit dem Code.'
 
     # add detailed info
     if isinstance(error, commands.MissingPermissions) or isinstance(error, commands.BotMissingPermissions):
@@ -76,8 +74,7 @@ async def on_command_error(ctx, error):
 
     # send it
     await ctx.send(embed=embed)
-    if TESTING_MODE or error_msg == 'Unbekannter Fehler.':
-        raise error  # if this is a testing system, show the full error in the console
+    if TESTING_MODE or error_msg == 'Unbekannter Fehler.': raise error  # if this is a testing system, show the full error in the console
 
 
 @client.command(aliases=['command', 'commands', 'help'], help='📃Listet entweder alle Befehle auf oder zeigt Info über einen bestimmten Befehl an.', usage='(<command name>)')
@@ -93,36 +90,35 @@ async def commandinfo(ctx, name=None):
                 embed = discord.Embed(
                     title='Command ' + c.name, color=COLOR, description=text)
                 await ctx.send(embed=embed)
-
                 return
 
         embed = discord.Embed(title='Command not found', color=COLOR,
                               description='This command does not exist...')
         await ctx.send(embed=embed)
+        return
 
-    else:
-        def sortkey(x):
-            return x.name
+    def sortkey(x):
+        return x.name
 
-        categories = {'⚙️': 'Hauptsystem', '📃': 'Info',
-                      '🔧': 'Tools', '🔒': 'Admin-Tools', '🔩': 'Andere'}
+    categories = {'⚙️': 'Hauptsystem', '📃': 'Info',
+                    '🔧': 'Tools', '🔒': 'Admin-Tools', '🔩': 'Andere'}
 
-        # ok, somehow I managed to get this to work, don't ask me how, but it WORKS
-        text = ''
-        for category in categories.keys():
-            text += f'\n{category} **{categories[category]}**\n'
-            for command in sorted(client.commands, key=sortkey):
-                if command.help.startswith(category):
-                    if command.aliases:
-                        text += f'{command.name} *({"/".join(command.aliases)})*\n'
-                    else:
-                        text += f'{command.name}\n'
-                    continue
-                
-        embed = discord.Embed(title='Befehle', color=COLOR, description=text)
-        embed.set_footer(
-            text=f'Benutze {PREFIX}help <command> für mehr Info über einen bestimmten Befehl.')
-        await ctx.send(embed=embed)
+    # ok, somehow I managed to get this to work, don't ask me how, but it WORKS
+    text = ''
+    for category in categories.keys():
+        text += f'\n{category} **{categories[category]}**\n'
+        for command in sorted(client.commands, key=sortkey):
+            if command.help.startswith(category):
+                if command.aliases:
+                    text += f'{command.name} *({"/".join(command.aliases)})*\n'
+                else:
+                    text += f'{command.name}\n'
+                continue
+            
+    embed = discord.Embed(title='Befehle', color=COLOR, description=text)
+    embed.set_footer(
+        text=f'Benutze {PREFIX}help <command> für mehr Info über einen bestimmten Befehl.')
+    await ctx.send(embed=embed)
 
 # load cogs
 # credit: https://youtu.be/vQw8cFfZPx0

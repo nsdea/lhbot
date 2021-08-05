@@ -1,10 +1,6 @@
 # Local
-try:
-    from .helpers import config
-except ImportError:
-    import helpers.config
+from .helpers import config
 
-import time
 import discord
 
 from discord.ext import commands

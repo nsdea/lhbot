@@ -4,7 +4,6 @@ try:
 except ImportError:
     import helpers.config
 
-import time
 import discord
 
 from discord.ext import commands

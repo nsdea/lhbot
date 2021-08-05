@@ -54,7 +54,7 @@ class Tools(commands.Cog):
 
         if member.activities:
             for member_activity in member.activities:
-                if type(member_activity) is discord.CustomActivity:
+                if isinstance(member_activity, discord.CustomActivity):
                     custom_status = member_activity.name
                     continue
                 activity = member_activity.name

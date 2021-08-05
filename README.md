@@ -22,12 +22,12 @@ The following statistics are **fully automatic and 100% up to date!**
 ![Could not load repository](https://img.shields.io/github/search/nsde/lhbot/@commands.Cog.listener?label=Event%20Listeners)
 ![Could not load repository](https://img.shields.io/github/search/nsde/lhbot/client.add_cog?label=Cogs%20%28Extensions%29)
 
-### Join our Discord community!
+### Join our Discord community
 ![Loading...](https://img.shields.io/discord/623157804013715456?label=Discord)
-# Contribute to support us!
 
-## Requirements
+## Contribution Requirements
 - Some coding knowledge (*Python*, *Git(Hub)*, *IDEs*, *Discord*,...)
+
 - If you're not familiar with most of the terms listed above, you may watch some tutorials or ask us first
   - German tutorials:
     - DiscordPy-Serie: https://www.youtube.com/playlist?list=PLNmsVeXQZj7rI3usLYlWhsjdFJ-MER_pU
@@ -45,11 +45,15 @@ The following statistics are **fully automatic and 100% up to date!**
 
 ### Software
 - An **IDE**, e.g. *Visual Studio Code*, *PyCharm* or *Sublime Text*
+
 - ***Python*** installation
   - Should be `3.7`-`3.9`
   - `3.8.10` is recommended
+  
 - ***pip*** (the package manager for *Python*)
+  
 - ***git*** (you may also connect it with your IDE using an extension)
+  
 - Up-to-date **operating system** (OS)
   - *Ubuntu Linux* is recommended, *Windows* should also work (Windows 10 or above is recommended)
 
@@ -57,28 +61,48 @@ The following statistics are **fully automatic and 100% up to date!**
 - Pretty much everything will work fine
 ## How to get started
 - Download the source code & unzip it with whatever tool you want to (e.g. 7zip, WinRar)
+
 - Get yourself a **bot token**, so you can access the bot
+
     - You can either ask us, or
+  
     - create a testing bot (recommended option), here's how (this only needs to be done ONCE):
+  
       - Go to the [Discord Developer Portal](https://discord.com/developers/applications) (you maybe need to sign in)
+  
       - Create a **new application** by clicking the bottom on the top right
+  
       - Give it a **name** & create it
+  
       - Go to the *Bot* tab
+  
       - **Add a bot** by clicking the blue button
+  
       - Scroll down and activate the following:
+  
         - *Presence Intent*
+  
         - *Server Members Intent*
+  
       - Make sure to **save changes** whenever asked to!
+  
       - Scroll down to *OAuth2 URL Generator* and select *bot* (in the middle)
+  
       - You can change the **bot permissions** at the bottom if you wish to
+  
       - Copy the **bot invite URL** by clicking *Copy* under the *Scopes*-Section
+  
       - **Invite the bot** to your testing-server by entering the URL and following the steps on screen
+  
       - Finally, go to the *Bot*-Tab in the *Developer Portal* and **copy the client token** (blue button "Copy" at the top left)
 
 - **Rename** the `dotenv_template.txt` to `.env` and change its values according to the template, keep in mind: 
    > The content of `.env` is **top secret!** Don't give anyone access to it.
+
 - Install all needed packages using `pip install -r requirements.txt`
+
 - To **start the bot**, run `src/bot.py` using the terminal.
+
 - GLHF!
 ## Commands
 

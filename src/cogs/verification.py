@@ -38,7 +38,7 @@ class Verification(commands.Cog):
             try:
                 await self.client.wait_for('message', check=message_check, timeout=config.load()['system']['verification']['timeout_seconds'])
             except asyncio.TimeoutError: # time's up
-                verification_messages.append(await verification_channel.send(delete_after=10, content=member.mention, embed=discord.Embed(title='Zeit abgelaufen!', color=config.load()['design']['colors']['primary'], description=f'Die Zeit für die Verifizierungsaufgabe ist leider abgelaufen.')))
+                verification_messages.append(await verification_channel.send(delete_after=10, content=member.mention, embed=discord.Embed(title='Zeit abgelaufen!', color=config.load()['design']['colors']['primary'], description='Die Zeit für die Verifizierungsaufgabe ist leider abgelaufen.')))
                 return
             
             # user sent something:

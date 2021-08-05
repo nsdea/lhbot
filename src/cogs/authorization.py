@@ -2,7 +2,6 @@
 from .helpers import config
 from .helpers import authorize
 
-import time
 import discord
 
 from discord.ext import commands
@@ -15,11 +14,11 @@ class Authorization(commands.Cog):
     async def auth(self, ctx, url=None):
         if url: # URL argument exists
             if isinstance(ctx.channel, discord.DMChannel): # command is being ran in a DM channel
-                await ctx.reply(embed=discord.Embed(title='LH Connect - Wichtiger Hinweis!', description=f':warning: **Ganz wichtig! Lösche bitte deine Nachricht!**\nDies dient deiner eigenen Sicherheit.', color=0xFFFF00))
+                await ctx.reply(embed=discord.Embed(title='LH Connect - Wichtiger Hinweis!', description=':warning: **Ganz wichtig! Lösche bitte deine Nachricht!**\nDies dient deiner eigenen Sicherheit.', color=0xFFFF00))
 
                 auth_id = authorize.auth(url)
                 if auth_id == ctx.author.id: # connected
-                    await ctx.author.send(embed=discord.Embed(title='LH Connect - Erfolg', description=f':white_check_mark: Super! Dein Konto wurde **erfolgreich** mit *LH Connect* verbunden!', color=config.load()['design']['colors']['primary']))
+                    await ctx.author.send(embed=discord.Embed(title='LH Connect - Erfolg', description=':white_check_mark: Super! Dein Konto wurde **erfolgreich** mit *LH Connect* verbunden!', color=config.load()['design']['colors']['primary']))
 
                     for role_id in config.load()['system']['verification']['role_id_on_success']: # for every single verification role
                         verification_role =  ctx.author.guild.get_role(role_id) # create object to work with

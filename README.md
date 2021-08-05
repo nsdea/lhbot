@@ -108,7 +108,7 @@ The following statistics are **fully automatic and 100% up to date!**
 
 | Commands | Example | Description | Authorization | Status |
 | ------ | ------ |  ------ | ------ | ------ |
-| !meme | !meme | Sends a meme | @everyone  | 🔴 |
+| !meme | !meme | Sends a meme | @everyone  | 🟢 |
 | !game | !game | A little game | @everyone  | 🔴 |
 | !ban | !ban "@USER" | Ban a user | @owner  | 🟢 |
 | !unban | !unban "@USER" | Unban the user | @owner  | 🟢 |
@@ -134,6 +134,7 @@ The following statistics are **fully automatic and 100% up to date!**
 🟢 **Ready for use**
 
 🔵 **Fully functional**
+> = no need to be improved
 
 ******
 

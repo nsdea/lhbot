@@ -100,8 +100,13 @@ async def commandinfo(ctx, name=None):
     def sortkey(x):
         return x.name
 
-    categories = {'⚙️': 'Hauptsystem', '📃': 'Info',
-                    '🔧': 'Tools', '🔒': 'Admin-Tools', '🔩': 'Andere'}
+    categories = {
+        '⚙️': 'Hauptsystem',
+        '📃': 'Info',
+        '🔧': 'Tools',
+        '🔒': 'Admin-Tools',
+        '🎮': 'Spiel & Spaß',
+        '🔩': 'Andere'}
 
     # ok, somehow I managed to get this to work, don't ask me how, but it WORKS
     text = ''

@@ -19,7 +19,7 @@ class Tools(commands.Cog):
     @commands.has_permissions(manage_messages=True)
     @commands.command(help='🔒Löscht eine bestimme Anzahl von Nachrichten im aktuellen Kanal, kein Argument angeben, um alle Nachrichten in dem aktuellen zu löschen. Benötigt die "manage_messages" Berechtigung für sowohl den Bot, als auch für den Nutzer.', aliases=['purge'])
     async def clear(self, ctx, count=999999):
-        are_you_sure_message = await ctx.send(delete_after=60, embed=discord.Embed(title='Bist du dir sicher?', description=f'Reagiere, um **{count if count != 999999 else "alle"}** Nachrichten in diesem Kanal zu löschen.\nDieser Vorgang kann nicht rückgängig gemacht werden.', color=discord.Color(0xFFFF00)).set_footer(text=f'Diese Nachricht wird nach 60 Sekunden gelöscht.'))
+        are_you_sure_message = await ctx.send(delete_after=60, embed=discord.Embed(title='Bist du dir sicher?', description=f'Reagiere, um **{count if count != 999999 else "alle"}** Nachrichten in diesem Kanal zu löschen.\nDieser Vorgang kann nicht rückgängig gemacht werden.', color=discord.Color(0xFFFF00)).set_footer(text='Diese Nachricht wird nach 60 Sekunden gelöscht.'))
         
         await are_you_sure_message.add_reaction('☑️')
 
@@ -27,11 +27,11 @@ class Tools(commands.Cog):
 
         try:
             await self.client.wait_for('reaction_add', check=check, timeout=60)
-        except asyncio.TimeoutError: # Zeit abgelaufen?
+        except asyncio.TimeoutError:
             return
 
         await ctx.channel.purge(limit=count)
-        await ctx.send(delete_after=5, embed=discord.Embed(title=':wastebasket: Chat gepurged!', description=f'**{count if count != 999999 else "Alle"}** Nachrichten im Kanal sollten jetzt weg sein! :)', color=discord.Color(0x00FF00)).set_footer(text=f'Diese Nachricht wird nach 5 Sekunden gelöscht.'))
+        await ctx.send(delete_after=5, embed=discord.Embed(title=':wastebasket: Chat gepurged!', description=f'**{count if count != 999999 else "Alle"}** Nachrichten im Kanal sollten jetzt weg sein! :)', color=discord.Color(0x00FF00)).set_footer(text='Diese Nachricht wird nach 5 Sekunden gelöscht.'))
 
     @commands.has_permissions(ban_members=True)
     @commands.command(help='🔒Bannt jemanden (Eingabe: ping/name#tag/ID). [Benötigt die "ban_members" Berechtigung für sowohl den Bot, als auch für den Nutzer.]')

@@ -35,7 +35,7 @@ def auth(url): # https://discord.com/developers/docs/topics/oauth2
         account_data = requests.get(url=f'{API_ENDPOINT}/users/@me', headers={'authorization': 'Bearer ' + connection_status['access_token']}).json()
 
         return int(account_data['id'])
-    except:
+    except Exception:
         return 0
 
 if __name__ == '__main__':

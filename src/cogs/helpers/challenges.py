@@ -6,7 +6,7 @@ import random
 import discord
 
 def math():
-    """Returns a math problem and its answer"""
+    """Returns a math problem and its answer."""
     problems = [
         f'{random.randint(10, 20)} - {random.randint(0, 10)}',
         f'{random.randint(0, 10)} + {random.randint(0, 10)}',
@@ -18,7 +18,7 @@ def math():
     return [text, correct]
 
 def number():
-    """Returns a number as a text and its digit-number"""
+    """Returns a number as a text and its digit-number."""
     problem = ''
     correct = ''
 
@@ -32,7 +32,7 @@ def number():
     return [text, correct]
 
 def highlow():
-    """Returns a number with descriptive text and the correct answer"""
+    """Returns a number with descriptive text and the correct answer."""
     a = random.randint(0, 100)
     b = random.randint(0, 100)
     correct = '>' if a > b else '<'
@@ -41,11 +41,11 @@ def highlow():
     return [text, correct]
 
 def get_challenge():
-    """Returns a question and the correct answer"""
+    """Returns a question and the correct answer."""
     return random.choice([math(), number(), highlow()])
 
 def get_challenge_with_embed():
-    """Returns a shiny looking verification embed (list index [0]) and the correct answer (list index [1]) :)"""
+    """Returns a shiny looking verification embed (list index [0]) and the correct answer (list index [1]) :)."""
     c = get_challenge()
     embed = discord.Embed(color=config.load()['design']['colors']['primary'], title='Verifizierung', description=c[0]).set_footer(text=f'Schreibe die Antwort einfach in den Kanal! Du hast {config.load()["system"]["verification"]["timeout_seconds"]} Sekunden Zeit.', icon_url='https://yt3.ggpht.com/ytc/AKedOLTY7JZ9TbI_ZftKkSvHXXzMuFxJM16i4ly4Ako-dA=s176-c-k-c0x00ffffff-no-rj')
     return embed, c[1] # returns the <discord Embed> object and the correct answer

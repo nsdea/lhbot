@@ -21,9 +21,9 @@ class Authorization(commands.Cog):
                     await ctx.author.send(embed=discord.Embed(title='LH Connect - Erfolg', description=':white_check_mark: Super! Dein Konto wurde **erfolgreich** mit *LH Connect* verbunden!', color=config.load()['design']['colors']['primary']))
 
                     for role_id in config.load()['system']['verification']['role_id_on_success']: # for every single verification role
-                        verification_role =  ctx.author.guild.get_role(role_id) # create object to work with
-                        if verification_role in ctx.author.guild.roles: # if the Discord server has this role 
-                            await ctx.author.add_roles(verification_role)
+                        for guild in self.client.guilds:
+                            if role_id in [r.id for r in guild.roles] and auth_id in [m.id for m in guild.members]: # if the Discord server has this role 
+                                await guild.get_member(auth_id).add_roles(guild.get_role(role_id))
 
                 else: # error
                     await ctx.author.send(embed=discord.Embed(title='LH Connect - Fehler', description=':x: Leider konnte dein Konto **nicht verbunden** werden.\nVersuche es erneut (von Anfang an!), möglichweise musst du etwas warten.', color=0xFF0000))

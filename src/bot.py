@@ -13,6 +13,9 @@ COLOR = config.load()['design']['colors']['primary']  # primary color for embeds
 TESTING_MODE = socket.gethostname() in config.load()['bot']['testing_device_names']  # testing systems
 PREFIX = config.load()['bot']['prefix']  # command prefix
 
+for temp_file in os.listdir('temp/'):
+    os.remove('temp/' + temp_file)
+
 # create bot, help_command is none because it's a custom one
 client = commands.Bot(
     command_prefix=commands.when_mentioned_or(PREFIX), help_command=None, intents=discord.Intents.all())

@@ -1,7 +1,6 @@
 # local
 from . import config
 
-import ast
 import random
 import discord
 
@@ -14,7 +13,7 @@ def math():
     ]
     problem = random.choice(problems)
     text = f'Berechne folgendes: **`{problem}`**'
-    correct = str(ast.literal_eval(problem))
+    correct = str(eval(problem))
     return [text, correct]
 
 def number():

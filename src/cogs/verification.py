@@ -1,5 +1,6 @@
 # local imports
 from .helpers import config # saves time using a YAML function 
+from .helpers import welcome # generates a welcome screen image
 from .helpers import challenges # generates random verification challenges for the user to solve
 
 import discord
@@ -62,6 +63,13 @@ class Verification(commands.Cog):
             else:
                 color = 0xFF0000
                 verification_messages.append(await verification_channel.send(content=member.mention, embed=discord.Embed(color=color, title=':x: Das ist leider falsch!', description='Du hast die Verifizierungsaufgabe leider nicht bestanden. Sorry ¯\_(ツ)_/¯')))
+
+            for channel_id in config.load()['system']['welcome_channel_ids']:
+                welcome_channel = await self.client.fetch_channel(channel_id) # create object to work with
+                if not welcome_channel in member.guild.channels:
+                    continue
+
+            await welcome_channel.send(file=welcome.join(member=member))
 
             await asyncio.sleep(1)
 

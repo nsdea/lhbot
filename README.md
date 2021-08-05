@@ -112,8 +112,8 @@ The following statistics are **fully automatic and 100% up to date!**
 | !game | !game | A little game | @everyone  | 🔴 |
 | !ban | !ban "@USER" | Ban a user | @owner  | 🟢 |
 | !unban | !unban "@USER" | Unban the user | @owner  | 🟢 |
-| !mute | !mute "@USER" | Mute a user | @owner  | 🟠 |
-| !unmute | !unmute "@USER" | Unmute a user | @owner  | 🟠 |
+| !mute | !mute "@USER" | Mute a user | @owner  | 🟢 |
+| !unmute | !unmute "@USER" | Unmute a user | @owner  | 🟢 |
 | !set | !set join "#channel", !set leave "#channel" | Sets the channel in which the (welcome / leave) messages are sent to. | @owner  | 🔴 |
 | !del | !del join "#channel", !del leave "#channel" | Removes the channel in which the (welcome / leave) messages are sent to. | @owner  | 🔴 |
 | !help | !help | Shows a help page | @everyone  | 🔵 |

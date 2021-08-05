@@ -119,5 +119,32 @@ class Tools(commands.Cog):
         embed.set_thumbnail(url=ctx.guild.icon_url)
         await ctx.send(embed=embed)
 
+    @commands.has_permissions(kick_members=True)
+    @commands.command(help='🔒Mute jemanden (Eingabe: ping/name#tag/ID) [Benötigt die "kick_members" Berechtigung für den Nutzer.]')
+    async def mute(self, ctx, member: discord.Member):
+        roles = []
+        for role_id in config.load()['commands']['mute_role_ids']:
+            if role_id in [r.id for r in ctx.guild.roles]:
+                roles.append(ctx.guild.get_role(role_id))
+                await member.add_roles(ctx.guild.get_role(role_id))
+
+        embed = discord.Embed(title=f'{member} wurde gemutet!', color=0xFF0000, description=f'{member.mention} hat die {"folgenden Rollen" if len(roles) > 1 else "folgende Rolle"} bekommen:\n> {" ".join(r.mention for r in roles)}\nund hat ab sofort beschränken Zugriff auf den Server.')
+        embed.set_thumbnail(url=member.avatar_url)
+        await ctx.send(embed=embed)
+
+    @commands.has_permissions(kick_members=True)
+    @commands.command(help='🔒Entmute jemanden (Eingabe: ping/name#tag/ID) [Benötigt die "kick_members" Berechtigung für den Nutzer.]')
+    async def unmute(self, ctx, member: discord.Member):
+        roles = []
+        for role_id in config.load()['commands']['mute_role_ids']:
+            if role_id in [r.id for r in ctx.guild.roles]:
+                roles.append(ctx.guild.get_role(role_id))
+                await member.remove_roles(ctx.guild.get_role(role_id))
+
+        embed = discord.Embed(title=f'{member} wurde entmutet!', color=config.load()['design']['colors']['primary'], description=f'{member.mention} hat die {"folgenden Rollen" if len(roles) > 1 else "folgende Rolle"} entfernt bekommen:\n> {" ".join(r.mention for r in roles)}\nund hat ab sofort wieder normalen Zugriff auf den Server.')
+        embed.set_thumbnail(url=member.avatar_url)
+        await ctx.send(embed=embed)
+
+
 def setup(client):
     client.add_cog(Tools(client))

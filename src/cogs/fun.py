@@ -4,6 +4,8 @@ try:
 except ImportError:
     import helpers.config
 
+from .helpers import quiz
+
 import os
 import random
 import discord
@@ -78,6 +80,58 @@ class Fun(commands.Cog):
             except asyncio.TimeoutError:
                 return
             msg = await send()
+
+    @commands.command(help='🎮Quiz spielen.')
+    async def quiz(self, ctx):
+        msg = await ctx.send(embed=discord.Embed(title='Quiz-Info', description='Willkommen bei dem **LH-Quiz**! Hier geht es um alles mögliche, was Software, Sicherheit & das Internet betrifft. Du hast für **jede Frage 10 Sekunden**. Außerdem gibt\'s **5 Fragen pro Quiz**.\nDu kannst das Quiz jederzeit mit :no_entry_sign: abbrechen und das Ergebnis anzeigen lassen.\n> Reagiere, um loszulegen!', color=config.load()['design']['colors']['primary']))
+
+        await msg.add_reaction('☑️')
+
+        def check(reaction, user): return reaction.message == msg and user == ctx.author
+
+        try:
+            await self.client.wait_for('reaction_add', check=check, timeout=60)
+        except asyncio.TimeoutError:
+            return
+
+        already_asked = []
+        quiz_dict = quiz.quiz_base()
+
+        correct = 0
+        count = 0
+        while count < 5:
+            for item in quiz_dict.keys():
+                if item in already_asked:
+                    quiz_dict.pop(item)
+
+            question = random.choice(list(quiz_dict.keys()))
+            already_asked.append(question)
+
+            answer = quiz_dict[question][0]
+            answers = random.shuffle(quiz_dict[question])
+            
+            msg = await ctx.send(embed=discord.Embed(title=question, description=f'1️⃣ {answers[0]}\n2️⃣ {answers[1]}\n3️⃣ {answers[2]}\n4️⃣ {answers[3]}', color=config.load()['design']['colors']['primary_dark']).set_footer(text='Du hast 10 Sekunden, viel Glück!'))
+
+
+            for emoji in '1️⃣2️⃣3️⃣4️⃣🚫':
+                await msg.add_reaction(emoji)
+            
+            def check(reaction, user):
+                globals()['reacted'] = str(reaction.emoji)
+                return reaction.message == msg and (not user.bot) and str(reaction) == '▶️'
+
+            try:
+                await self.client.wait_for('reaction_add', check=check, timeout=10)
+            except asyncio.TimeoutError:
+                await ctx.send(embed=discord.Embed(title='Zeit ist um!', description=f'Du hast leider nur 10 Sekunden für jede Frage.', color=0xFF0000))       
+                continue
+
+            if globals()['reacted']:
+                correct += 1
+            
+            count += 1
+        
+        msg = await ctx.send(embed=discord.Embed(title='Quiz-Auswertung', description=f'Vielen Dank für deine Teilnahme!\n> **Ergebnis:** {correct}/5 richtig.', color=config.load()['design']['colors']['primary']))       
 
 def setup(client):
     client.add_cog(Fun(client))

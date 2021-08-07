@@ -4,6 +4,7 @@ bot:
     - 657900196189044736 # onlix
     - 338711554683830292 # Raptor
     - 334567239342620675 # LH
+
   testing_device_names:
     # onlix
     - 'RTX3090'

@@ -11,6 +11,7 @@ The following statistics are **fully automatic and 100% up to date!**
 ![Could not load repository](https://img.shields.io/github/languages/top/nsde/lhbot)
 ![Could not load repository](https://img.shields.io/github/license/nsde/lhbot)
 ![Could not load repository](https://img.shields.io/github/repo-size/nsde/lhbot)
+![Could not load repository](https://img.shields.io/github/search/nsde/lhbot/client.add_cog?label=Cogs%20%28Extensions%29)
 ### Security & Stability
 ![Could not load repository](https://img.shields.io/snyk/vulnerabilities/github/nsde/lhbot)
 ![Could not load repository](https://img.shields.io/github/issues-raw/nsde/lhbot)

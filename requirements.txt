@@ -3,3 +3,4 @@ pillow
 discord
 asyncpraw
 python-dotenv
+python-youtube

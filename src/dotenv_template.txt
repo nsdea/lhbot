@@ -1,3 +1,5 @@
+YOUTUBE_ID=your_youtube_api_id_here
+YOUTUBE_KEY=your_youtube_api_key_here
 REDDIT_ID=your_reddit_app_id_here
 REDDIT_SECRET=your_reddit_app_secret_here
 REDDIT_PASSWORD=your_reddit_bot_account_password_here

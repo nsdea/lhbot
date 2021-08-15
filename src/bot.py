@@ -86,9 +86,9 @@ async def commandinfo(ctx, name=None):
         for c in client.commands:
             if name.lower() == c.name or name.lower() in list(c.aliases):
                 text = f'''
-        **Help:** {c.help if c.help else ' - '}
-        **Usage:** {c.usage if c.usage else ' - '}
-        **Aliases:** {', '.join(c.aliases) if c.aliases else ' - '}
+        **Information:** {c.help if c.help else ' - '}
+        **Argumente:** {c.usage if c.usage else ' - '}
+        **Aliasse:** {', '.join(c.aliases) if c.aliases else ' - '}
         '''
                 embed = discord.Embed(
                     title='Command ' + c.name, color=COLOR, description=text)

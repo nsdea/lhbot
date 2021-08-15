@@ -1,43 +1,21 @@
 bot:
+  developer_discord_ids: [657900196189044736, 338711554683830292, 334567239342620675]
   prefix: '!'
-  developer_discord_ids:
-    - 657900196189044736 # onlix
-    - 338711554683830292 # Raptor
-    - 334567239342620675 # LH
-
-  testing_device_names:
-    # onlix
-    - 'RTX3090'
-    - 'onlix'
-    - 'uwuntu'
-
-system:
-  verification:
-    channel_ids:
-      - 789592545624719402 # Test
-    timeout_seconds: 60
-    role_id_on_success:
-      - 872502894870552626 # Test
-  welcome_channel_ids:
-    - 789592546069708816 # Test
-
+  testing_device_names: [RTX3090, onlix, uwuntu]
 commands:
   leaderboard:
-    chat_channel_ids:
-      - 789592545624719408 # Test #Chatroom
-  mute_role_ids:
-    - 872877978365882378 # Test
-
+    chat_channel_ids: [789592545624719408]
+  mute_role_ids: [872877978365882378]
 design:
   colors:
-    primary: 0x00DCFF # light blue
-    primary_dark: 0x214B8D # blue
-    primary_night: 0x000A1C # dark blue
-
-    primary_rgb:
-      - 0
-      - 220
-      - 255
-
-misc:
-  discord_api_version: 9
+    primary: 56575
+    primary_dark: 2182029
+    primary_night: 2588
+    primary_rgb: [0, 220, 255]
+misc: {discord_api_version: '8'}
+system:
+  verification:
+    channel_ids: [789592545624719402]
+    role_id_on_success: [872502894870552626]
+    timeout_seconds: 60
+  welcome_channel_ids: [789592546069708816]

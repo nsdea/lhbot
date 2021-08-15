@@ -36,13 +36,13 @@ class Tools(commands.Cog):
     @commands.has_permissions(ban_members=True)
     @commands.command(help='🔒Bannt jemanden (Eingabe: ping/name#tag/ID). [Benötigt die "ban_members" Berechtigung für sowohl den Bot, als auch für den Nutzer.]')
     async def ban(self, ctx, member: discord.Member):
-        await member.ban(reason=str(ctx.author))
+        await ctx.guild.ban(user=member, reason=str(ctx.author))
         await ctx.message.add_reaction('👍')
 
     @commands.has_permissions(ban_members=True)
     @commands.command(help='🔒Entbannt jemanden (Eingabe: ID). [Benötigt die "ban_members" Berechtigung für sowohl den Bot, als auch für den Nutzer.]')
     async def unban(self, ctx, user: discord.User):
-        await ctx.guild.unban(user, reason=str(ctx.author))
+        await ctx.guild.unban(user=user, reason=str(ctx.author))
         await ctx.message.add_reaction('👍')
 
     @commands.command(help='🔧Zeit Infos über Mitglieder der Servers an! (Eingabe: ping/name#tag/ID)')

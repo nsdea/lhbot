@@ -17,12 +17,12 @@ class Leaderboard(commands.Cog):
             if channel_id in [c.id for c in ctx.guild.channels]: # correct server
                 async for message in self.client.get_channel(channel_id).history(limit=500):
                     if message.author.bot:
-                        return
+                        continue
                     try:
                         users[message.author.mention] += 1
                     except KeyError:
-                        users[message.author.mention] = 1
-        
+                        users[message.author.mention] = 1        
+
         users = sorted(users.items(), key=lambda x:x[1], reverse=True)
         users = dict(users[:10])
 

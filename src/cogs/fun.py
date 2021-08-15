@@ -112,13 +112,12 @@ class Fun(commands.Cog):
             
             msg = await ctx.send(embed=discord.Embed(title=question, description=f'1️⃣ {answers[0]}\n2️⃣ {answers[1]}\n3️⃣ {answers[2]}\n4️⃣ {answers[3]}', color=config.load()['design']['colors']['primary_dark']).set_footer(text='Du hast 10 Sekunden, viel Glück!'))
 
-
             for emoji in '1️⃣2️⃣3️⃣4️⃣🚫':
                 await msg.add_reaction(emoji)
             
             def check(reaction, user):
                 globals()['reacted'] = str(reaction.emoji)
-                return reaction.message == msg and (not user.bot) and str(reaction) == '▶️'
+                return reaction.message == msg and (not user.bot) and str(reaction) in '1️⃣2️⃣3️⃣4️⃣🚫'
 
             try:
                 await self.client.wait_for('reaction_add', check=check, timeout=10)

@@ -107,6 +107,8 @@ The following statistics are **fully automatic and 100% up to date!**
 - GLHF!
 ## Commands
 
+¹ means, that the command 
+
 | Commands | Example | Description | Authorization | Status |
 | ------ | ------ |  ------ | ------ | ------ |
 | !meme | !meme | Sends a meme | @everyone  | 🟢 |

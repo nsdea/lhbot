@@ -1,6 +1,8 @@
-pyyaml
-pillow
-discord
-asyncpraw
-python-dotenv
-python-youtube
+requests==2.22.0
+asyncpraw==7.4.0
+discord.py==1.7.3
+discord==1.7.3
+Pillow==8.3.1
+python-dotenv==0.19.0
+PyYAML==5.4.1
+pyyoutube==1.0.2

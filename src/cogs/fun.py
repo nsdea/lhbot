@@ -99,37 +99,51 @@ class Fun(commands.Cog):
 
         correct = 0
         count = 0
+        temp_quiz_dict = quiz_dict
+
         while count < 5:
-            for item in quiz_dict.keys():
+
+            for item in list(temp_quiz_dict):
                 if item in already_asked:
                     quiz_dict.pop(item)
 
             question = random.choice(list(quiz_dict.keys()))
             already_asked.append(question)
 
-            answer = quiz_dict[question][0]
-            answers = random.shuffle(quiz_dict[question])
+            answers = quiz_dict[question]
+            answers = random.sample(answers, len(answers))
             
-            msg = await ctx.send(embed=discord.Embed(title=question, description=f'1️⃣ {answers[0]}\n2️⃣ {answers[1]}\n3️⃣ {answers[2]}\n4️⃣ {answers[3]}', color=config.load()['design']['colors']['primary_dark']).set_footer(text='Du hast 10 Sekunden, viel Glück!'))
+            number = 0
+            for a in answers:
+                if a == quiz_dict[question][0]:
+                    print(number, a)
+                    correct_emoji = ['1️⃣', '2️⃣', '3️⃣', '4️⃣'][number]
+                number += 1
 
-            for emoji in '1️⃣2️⃣3️⃣4️⃣🚫':
+            text = f'1️⃣ {answers[0]}\n2️⃣ {answers[1]}\n3️⃣ {answers[2]}\n4️⃣ {answers[3]}'
+
+            msg = await ctx.send(embed=discord.Embed(title=question, description=text, color=config.load()['design']['colors']['primary_dark']).set_footer(text='Du hast 10 Sekunden, viel Glück!'))
+
+            for emoji in ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '🚫']:
                 await msg.add_reaction(emoji)
             
             def check(reaction, user):
                 globals()['reacted'] = str(reaction.emoji)
                 return reaction.message == msg and (not user.bot) and str(reaction) in '1️⃣2️⃣3️⃣4️⃣🚫'
 
+            count += 1
+
+
             try:
                 await self.client.wait_for('reaction_add', check=check, timeout=10)
             except asyncio.TimeoutError:
-                await ctx.send(embed=discord.Embed(title='Zeit ist um!', description=f'Du hast leider nur 10 Sekunden für jede Frage.', color=0xFF0000))       
+                await ctx.send(embed=discord.Embed(title='Zeit ist um!', description=f'Du hast leider nur 10 Sekunden für jede Frage. Verloren!', color=0xFF0000))       
                 continue
 
-            if globals()['reacted']:
+            print(correct_emoji.strip())
+            if globals()['reacted'].strip() == correct_emoji.strip():
                 correct += 1
-            
-            count += 1
-        
+                    
         msg = await ctx.send(embed=discord.Embed(title='Quiz-Auswertung', description=f'Vielen Dank für deine Teilnahme!\n> **Ergebnis:** {correct}/5 richtig.', color=config.load()['design']['colors']['primary']))       
 
 def setup(client):
